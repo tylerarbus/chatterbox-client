@@ -15,7 +15,7 @@ var app = {
       }
     });
   },
-  send() {
+  send(message) {
     $.ajax({
       // This is the url you should use to communicate with the parse API server.
       url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
