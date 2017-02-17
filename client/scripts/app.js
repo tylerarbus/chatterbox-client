@@ -30,6 +30,9 @@ var app = {
         console.error('chatterbox: Failed to send message', data);
       }
     });
+  },
+  fetch() {
+    
   }
 };
 
