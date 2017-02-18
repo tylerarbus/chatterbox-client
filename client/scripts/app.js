@@ -56,7 +56,7 @@ var app = {
 // Dropdown Button Script
 
 function myFunction() {
-    document.getElementById('myDropdown').classList.toggle('show');
+  document.getElementById('myDropdown').classList.toggle('show');
 }
 
 function filterFunction() {
