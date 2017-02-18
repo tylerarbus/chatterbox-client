@@ -1,6 +1,8 @@
 var app = {
   init() {
-
+    app.fetch();
+    app.handleUsernameClick();
+    app.handleSubmit();
   },
 
   server: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
@@ -28,12 +30,13 @@ var app = {
       type: 'GET',
       contentType: 'application/json',
       data: {
-        limit: 10,
+        limit: 30,
         order: '-createdAt',
       },
       success: function (data) {
-        app.messages = data;
-        console.log('chatterbox: Message received');
+        app.messages = data.results;
+        app.renderMessage();        
+        console.log('chatterbox: Fetched new messages');
       },
       error: function (data) {
         // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -47,10 +50,18 @@ var app = {
   clearMessages: function() {
     $('#chats').empty();
   },
+
   renderMessage: function() {
-    app.messages.results.forEach(function(message) {
-      var $chat = '<div id="message">' + message.text + '</div>';
-      $('#chats').append($chat);      
+    app.clearMessages();
+    app.messages.forEach(function(message) {
+      if (typeof message.text === 'string') {
+        var $text = '<div id="text">' + message.text.replace(/[^a-z]/gi, ' ') + '</div>';
+        var $createdAt = '<div id="createdAt">' + message.createdAt + '</div>';
+        var $username = '<a  href="#" id="username">' + message.username + '</a>';
+        var $message = '<div id="message">' + $username + $text + $createdAt + '</div>';
+        $('#chats').append($message);      
+      }
+      app.handleUsernameClick();
     });
   },  
   renderRoom: function(roomName) {
@@ -58,10 +69,21 @@ var app = {
     $('#roomSelect').append($room);
   },
   handleUsernameClick: function() {
-
+    $(document).on('click', '#username', function(event) {
+      $(event.target).css('font-weight', 'bold');
+    });
   },
   handleSubmit: function() {
-
+    $(document).on('click', '#send', function() {
+      var username = window.location.search.split('=');
+      var message = {
+        username: username.pop(),
+        text: $('#messageBox').val(),
+        // roomname: '4chan'
+      };
+      console.log(message);
+      app.send(message);
+    }); 
   }
 };
 
@@ -87,6 +109,7 @@ var filterFunction = function() {
   }
 };
 
+$(document).ready(app.init());
 
 
 
