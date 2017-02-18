@@ -40,7 +40,11 @@ var app = {
   renderMessage(message) {
     var $chat = '<div id="message"></div>';
     $('#chats').append($chat);
-  }  
+  },  
+  renderRoom: function(roomName) {
+    var $room = '<div></div>';
+    $('#roomSelect').append($room);
+  }
 };
 
 
