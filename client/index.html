@@ -27,16 +27,11 @@
     <div id="main">
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
-      <div class="dropdown">
-      <button onclick="myFunction()" class="dropbtn">Select Room</button>
-        <div id="myDropdown" class="dropdown-content">
-          <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-          <a href="#room1">HRSF73</a>
-          <a href="#room2">HRSF72</a>
-          <a href="#room3">HR Alumni</a>
-          <a href="#room4">HR Staff</a>
-        </div>
-      </div>
+
+      <select id="selectRoom">
+        <option value="null">All messages</option>
+        <option>New room...</option>
+      </select>
     </div>
       <div id="newMessage">
           <input type="text" id="messageBox" name="messageBox" placeholder="What are you thinking right now?">

@@ -139,6 +139,9 @@ form input[type=text] {
     font-size: 17px;
 }
 
+.befriend {
+    font-weight: bold;
+}
 
 
 /*Dropdown Button Styling*/
